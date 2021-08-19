@@ -1,6 +1,6 @@
 <?php
-  require_once('./common.php');
-  $token = get_token();
+require_once "./common.php";
+$token = get_token();
 ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">

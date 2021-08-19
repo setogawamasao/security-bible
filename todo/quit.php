@@ -1,11 +1,12 @@
 <?php
-  require_once('./common.php');
-  require_loggedin($user);
-  $id = $user->get_id();
-  $token = get_token();
-  $reqid = filter_input(INPUT_GET, 'id');
-  if (empty($reqid))
+require_once "./common.php";
+require_loggedin($user);
+$id = $user->get_id();
+$token = get_token();
+$reqid = filter_input(INPUT_GET, "id");
+if (empty($reqid)) {
     $reqid = $id;
+}
 ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">
@@ -25,7 +26,9 @@
     <td></td><td><input type=submit value="退会"></td>
     </tr>
     </table>
-    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e($token); ?>">
+    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(
+    $token
+); ?>">
     <input type="hidden" name="id" value="<?php e($reqid); ?>">
     </form>
   </div><!-- /#changepwd -->

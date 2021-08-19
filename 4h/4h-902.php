@@ -1,7 +1,7 @@
 <body>
 IDとパスワードを盗みました<br>
-ID: <?php echo htmlspecialchars($_POST['id']); ?><br>
-パスワード: <?php echo htmlspecialchars($_POST['pwd']); ?><br>
+ID: <?php echo htmlspecialchars($_POST["id"]); ?><br>
+パスワード: <?php echo htmlspecialchars($_POST["pwd"]); ?><br>
 10秒後に本来のURLに遷移します。
 <script>
   setTimeout(function() {

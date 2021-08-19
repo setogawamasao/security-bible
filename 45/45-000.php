@@ -1,2 +1,2 @@
 <?php
-  system('rm /var/www/html/45/img/*');
+system("rm /var/www/html/45/img/*");

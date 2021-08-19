@@ -1,3 +1,3 @@
 <?php
-  header('Content-Type: application/jsont; charset=utf-8');
-  echo json_encode(array('time' => date('G:i')));
+header("Content-Type: application/jsont; charset=utf-8");
+echo json_encode(["time" => date("G:i")]);

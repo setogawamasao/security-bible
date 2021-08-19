@@ -1,12 +1,12 @@
 <?php
-  session_start();  // セッションの開始
-  $id = $_POST['ID'];
-  $pwd = $_POST['PWD'];
-  // IDとパスワードのどちからかが空の場合はログイン失敗
-  if ($id == '' || $pwd == '') {
-    die('ログイン失敗');
-  }
-  $_SESSION['ID'] = $id;
+session_start(); // セッションの開始
+$id = $_POST["ID"];
+$pwd = $_POST["PWD"];
+// IDとパスワードのどちからかが空の場合はログイン失敗
+if ($id == "" || $pwd == "") {
+    die("ログイン失敗");
+}
+$_SESSION["ID"] = $id;
 ?>
 <html>
 <head><title>ログイン</title></head>

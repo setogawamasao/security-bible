@@ -1,6 +1,6 @@
 <?php
 session_start();
-$array = array('name' => $_GET['name']);
+$array = ["name" => $_GET["name"]];
 ?><body>
 <div id="name"></div>
 <script>

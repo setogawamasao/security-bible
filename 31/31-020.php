@@ -1,5 +1,6 @@
 <?php
-  session_start();  // セッションの開始
+session_start();
+// セッションの開始
 ?>
 <html>
 <head><title>ログインしてください</title></head>

@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 require_loggedin($user);
 ?>
 <html>
@@ -9,7 +9,10 @@ require_loggedin($user);
 </head>
 <body>
 <div id="top">
-<?php $menu = 4; require "menu.php"; ?>
+<?php
+$menu = 4;
+require "menu.php";
+?>
   <div id="contents">
     todoをエクスポートします。「開始」ボタンを押してください<br>
     <form action="exportdo.php" method="post">

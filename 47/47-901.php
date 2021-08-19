@@ -1,6 +1,6 @@
 <?php
-  $id = @$_POST['id'];
-  $pwd = @$_POST['pwd'];
+$id = @$_POST["id"];
+$pwd = @$_POST["pwd"];
 ?>
 <html>
 <head>

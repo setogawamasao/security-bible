@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 require_loggedin($user);
 
 $reqid = filter_input(INPUT_POST, "id");
@@ -10,22 +10,24 @@ $token = filter_input(INPUT_POST, TOKENNAME);
 $id = $user->get_id();
 
 try {
-  $dbh = dblogin();
-  $sql = 'SELECT file FROM todos WHERE id=?';
-  $sth = $dbh->prepare($sql);
-  $rs = $sth->execute(array($item));
-  $result = $sth->fetch();
-  $file = $result['file'];
-var_dump($file);
-  unlink("attachment/$file");
+    $dbh = dblogin();
+    $sql = "SELECT file FROM todos WHERE id=?";
+    $sth = $dbh->prepare($sql);
+    $rs = $sth->execute([$item]);
+    $result = $sth->fetch();
+    $file = $result["file"];
+    var_dump($file);
+    unlink("attachment/$file");
 
-  $sql = 'UPDATE todos SET file=null WHERE id=?';
-  $sth = $dbh->prepare($sql);
-  $rs = $sth->execute(array($item));
+    $sql = "UPDATE todos SET file=null WHERE id=?";
+    $sth = $dbh->prepare($sql);
+    $rs = $sth->execute([$item]);
 } catch (PDOException $e) {
-var_dump($e);
-  $logger->add('クエリに失敗しました: ' . $e->getMessage());
-  die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください');
+    var_dump($e);
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください"
+    );
 }
 ?>
 <html>

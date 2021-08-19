@@ -15,21 +15,17 @@ You should have received a copy of the GNU General Public License along with thi
 
 **/
 
-include 'config/general.php';
-
-?><html>
+include "config/general.php"; ?><html>
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/rips.css" />
-	<?php
-
-	foreach($stylesheets as $stylesheet)
-	{
-		echo "\t<link type=\"text/css\" href=\"css/$stylesheet.css\" rel=\"";
-		if($stylesheet != $default_stylesheet) echo "alternate ";
-		echo "stylesheet\" title=\"$stylesheet\" />\n";
-	}
-	?>
+	<?php foreach ($stylesheets as $stylesheet) {
+     echo "\t<link type=\"text/css\" href=\"css/$stylesheet.css\" rel=\"";
+     if ($stylesheet != $default_stylesheet) {
+         echo "alternate ";
+     }
+     echo "stylesheet\" title=\"$stylesheet\" />\n";
+ } ?>
 	<script src="js/script.js"></script>
 	<script src="js/exploit.js"></script>
 	<script src="js/hotpatch.js"></script>
@@ -54,21 +50,19 @@ include 'config/general.php';
 			<td nowrap>verbosity level:</td>
 			<td nowrap>
 				<select id="verbosity" style="width:100%" title="select verbosity level">
-					<?php 
-					
-						$verbosities = array(
-							1 => '1. user tainted only',
-							2 => '2. file/DB tainted +1',
-							3 => '3. show secured +1,2',
-							4 => '4. untainted +1,2,3',
-							5 => '5. debug mode'
-						);
-						
-						foreach($verbosities as $level=>$description)
-						{
-							echo "<option value=\"$level\">$description</option>\n";							
-						}
-					?>
+					<?php
+     $verbosities = [
+         1 => "1. user tainted only",
+         2 => "2. file/DB tainted +1",
+         3 => "3. show secured +1,2",
+         4 => "4. untainted +1,2,3",
+         5 => "5. debug mode",
+     ];
+
+     foreach ($verbosities as $level => $description) {
+         echo "<option value=\"$level\">$description</option>\n";
+     }
+     ?>
 				</select>
 			</td>
 			<td align="right" nowrap>
@@ -76,37 +70,37 @@ include 'config/general.php';
 			</td>
 			<td>
 				<select id="vector" style="width:100%" title="select vulnerability type to scan">
-					<?php 
-					
-						$vectors = array(
-							'all' 			=> 'All',
-							'server' 		=> 'All server-side',							
-							'code' 			=> '- Code Execution',
-							'exec' 			=> '- Command Execution',
-							'file_read' 	=> '- File Disclosure',
-							'file_include' 	=> '- File Inclusion',							
-							'file_affect' 	=> '- File Manipulation',
-							'ldap' 			=> '- LDAP Injection',
-							'unserialize' 	=> '- PHP Object Injection',
-							'connect'		=> '- Protocol Injection',							
-							'ri'		 	=> '- Reflection Injection',
-							'database' 		=> '- SQL Injection',
-							'xpath' 		=> '- XPath Injection',
-							'other' 		=> '- other',
-							'client' 		=> 'All client-side',
-							'xss' 			=> '- Cross-Site Scripting',
-							'httpheader'	=> '- HTTP Response Splitting',
-							'fixation'		=> '- Session Fixation',
-							//'crypto'		=> 'Crypto hints'
-						);
-						
-						foreach($vectors as $vector=>$description)
-						{
-							echo "<option value=\"$vector\" ";
-							if($vector == $default_vector) echo 'selected';
-							echo ">$description</option>\n";
-						}
-					?>
+					<?php
+     $vectors = [
+         "all" => "All",
+         "server" => "All server-side",
+         "code" => "- Code Execution",
+         "exec" => "- Command Execution",
+         "file_read" => "- File Disclosure",
+         "file_include" => "- File Inclusion",
+         "file_affect" => "- File Manipulation",
+         "ldap" => "- LDAP Injection",
+         "unserialize" => "- PHP Object Injection",
+         "connect" => "- Protocol Injection",
+         "ri" => "- Reflection Injection",
+         "database" => "- SQL Injection",
+         "xpath" => "- XPath Injection",
+         "other" => "- other",
+         "client" => "All client-side",
+         "xss" => "- Cross-Site Scripting",
+         "httpheader" => "- HTTP Response Splitting",
+         "fixation" => "- Session Fixation",
+         //'crypto'		=> 'Crypto hints'
+     ];
+
+     foreach ($vectors as $vector => $description) {
+         echo "<option value=\"$vector\" ";
+         if ($vector == $default_vector) {
+             echo "selected";
+         }
+         echo ">$description</option>\n";
+     }
+     ?>
 				</select>
 			</td>
 			<td><input type="button" value="scan" style="width:100%" class="Button" onClick="scan(false);" title="start scan" /></td>
@@ -115,14 +109,13 @@ include 'config/general.php';
 			<td nowrap>code style:</td>
 			<td nowrap>
 				<select name="stylesheet" id="css" onChange="setActiveStyleSheet(this.value);" style="width:49%" title="select color schema for scan result">
-					<?php 
-						foreach($stylesheets as $stylesheet)
-						{
-							echo "<option value=\"$stylesheet\" ";
-							if($stylesheet == $default_stylesheet) echo 'selected';
-							echo ">$stylesheet</option>\n";
-						}
-					?>	
+					<?php foreach ($stylesheets as $stylesheet) {
+         echo "<option value=\"$stylesheet\" ";
+         if ($stylesheet == $default_stylesheet) {
+             echo "selected";
+         }
+         echo ">$stylesheet</option>\n";
+     } ?>	
 				</select>
 				<select id="treestyle" style="width:49%" title="select direction of code flow in scan result">
 					<option value="1">bottom-up</option>
@@ -150,7 +143,7 @@ include 'config/general.php';
 	</td>
 	<td width="25%" align="center" valign="center" nowrap>
 		<!-- Logo by Gareth Heyes -->
-		<div class="logo"><a id="logo" href="https://www.ripstech.com/latest/" target="_blank" title="get the latest version"><?php echo VERSION ?></a></div>
+		<div class="logo"><a id="logo" href="https://www.ripstech.com/latest/" target="_blank" title="get the latest version"><?php echo VERSION; ?></a></div>
 	</td></tr>
 	</table>
 	</div>

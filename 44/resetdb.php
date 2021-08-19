@@ -1,9 +1,9 @@
 <?php
-  header('Content-Type: text/html; charset=UTF-8');
-  $db = new PDO("mysql:host=127.0.0.1;dbname=wasbook", "wasbook", "wasbook");
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $db->query("SET NAMES utf8");
-  $sql = <<<EOS
+header("Content-Type: text/html; charset=UTF-8");
+$db = new PDO("mysql:host=127.0.0.1;dbname=wasbook", "wasbook", "wasbook");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->query("SET NAMES utf8");
+$sql = <<<EOS
 
 drop table books;
 drop table users;
@@ -38,7 +38,7 @@ INSERT INTO users VALUES ('sato', 'password', 'sato@example.net', '佐藤一志'
 
 EOS;
 
-  $db->query($sql);
+$db->query($sql);
 ?>
 <body>
 データベースをリセットしました

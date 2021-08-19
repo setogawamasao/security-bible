@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 $token = get_token();
 ?><html>
 <head>
@@ -8,7 +8,10 @@ $token = get_token();
 </head>
 <body>
 <div id="top">
-<?php $menu = 6; require "menu.php"; ?>
+<?php
+$menu = 6;
+require "menu.php";
+?>
   <div id="newuser">
     会員登録<BR>
     <form action="inquerydo.php" method="POST">
@@ -29,7 +32,9 @@ $token = get_token();
     <td></td><td><input type=submit value="送信"></td>
     </tr>
     </table>
-    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e($token); ?>">
+    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(
+    $token
+); ?>">
     </form>
   </div><!-- /#newuser -->
   <div id="footer">

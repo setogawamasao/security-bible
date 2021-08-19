@@ -1,6 +1,5 @@
 <?php
-  session_start();
-?>
+session_start(); ?>
 <html>
 <body>
 <form action="46-011.php" method="POST">

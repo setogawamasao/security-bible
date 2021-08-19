@@ -1,30 +1,32 @@
 <?php
-  require_once('./common.php');
-  require_loggedin($user);
-  $token = filter_input(INPUT_POST, TOKENNAME);
-  require_token($token);
-  $id = $user->get_id();
-  $pwd   = filter_input(INPUT_POST, 'newpwd');
-  $pwd2  = filter_input(INPUT_POST, 'newpwd2');
-  $reqid = filter_input(INPUT_POST, 'id');
+require_once "./common.php";
+require_loggedin($user);
+$token = filter_input(INPUT_POST, TOKENNAME);
+require_token($token);
+$id = $user->get_id();
+$pwd = filter_input(INPUT_POST, "newpwd");
+$pwd2 = filter_input(INPUT_POST, "newpwd2");
+$reqid = filter_input(INPUT_POST, "id");
 var_dump($pwd, $reqid);
-  if ($pwd !== $pwd2) {
-    die('パスワードが一致していません');
-  }
-  if (! $user->is_super() && $id !== $reqid) {
-    die('権限がありません');
-  }
-  try {
+if ($pwd !== $pwd2) {
+    die("パスワードが一致していません");
+}
+if (!$user->is_super() && $id !== $reqid) {
+    die("権限がありません");
+}
+try {
     $dbh = dblogin();
-  
-    $sql = 'UPDATE users SET pwd=? WHERE id=?';
+
+    $sql = "UPDATE users SET pwd=? WHERE id=?";
     $sth = $dbh->prepare($sql);
-    $rs = $sth->execute(array($pwd, $reqid));
-var_dump($rs);
-  } catch (PDOException $e) {
-    $logger->add('クエリに失敗しました: ' . $e->getMessage());
-    die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい');
-  }
+    $rs = $sth->execute([$pwd, $reqid]);
+    var_dump($rs);
+} catch (PDOException $e) {
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい"
+    );
+}
 ?>
 <html>
 <head>

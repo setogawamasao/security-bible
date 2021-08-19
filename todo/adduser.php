@@ -1,19 +1,21 @@
 <?php
-require_once './common.php';
-$id    = $_POST["id"];
-$pwd   = substr($_POST["pwd"], 0, 6);
+require_once "./common.php";
+$id = $_POST["id"];
+$pwd = substr($_POST["pwd"], 0, 6);
 $email = $_POST["email"];
-$icon  = $_POST["iconfname"];
+$icon = $_POST["iconfname"];
 
 try {
-  $dbh = dblogin();
+    $dbh = dblogin();
 
-  $sql = 'INSERT INTO users VALUES(NULL, ?, ?, ?, ?, 0)';
-  $sth = $dbh->prepare($sql);
-  $rs = $sth->execute(array($id, $pwd, $email, $icon));
+    $sql = "INSERT INTO users VALUES(NULL, ?, ?, ?, ?, 0)";
+    $sth = $dbh->prepare($sql);
+    $rs = $sth->execute([$id, $pwd, $email, $icon]);
 } catch (PDOException $e) {
-  $logger->add('クエリに失敗しました: ' . $e->getMessage());
-  die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください');
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください"
+    );
 }
 ?>
 <html>

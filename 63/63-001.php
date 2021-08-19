@@ -1,11 +1,17 @@
 <?php
-  session_start();
-  header('Content-Type: text/html; charset=Shift_JIS');
+session_start();
+header("Content-Type: text/html; charset=Shift_JIS");
 ?>
 <body>
 <form action="">
-‚¨–¼‘O:<input name=name value="<?php echo htmlspecialchars($_GET['name'], ENT_QUOTES); ?>"><BR>
-ƒ[ƒ‹ƒAƒhƒŒƒX:<input name=mail value="<?php echo htmlspecialchars($_GET['mail'], ENT_QUOTES); ?>"><BR>
+ï¿½ï¿½ï¿½ï¿½ï¿½O:<input name=name value="<?php echo htmlspecialchars(
+    $_GET["name"],
+    ENT_QUOTES
+); ?>"><BR>
+ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½X:<input name=mail value="<?php echo htmlspecialchars(
+    $_GET["mail"],
+    ENT_QUOTES
+); ?>"><BR>
 <input type="submit">
 </form>
 </body>

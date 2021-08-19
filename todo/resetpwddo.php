@@ -1,26 +1,30 @@
 <?php
-  require_once('./common.php');
-  $email = filter_input(INPUT_POST, 'email');
-  $token = filter_input(INPUT_POST, TOKENNAME);
-  require_token($token);
+require_once "./common.php";
+$email = filter_input(INPUT_POST, "email");
+$token = filter_input(INPUT_POST, TOKENNAME);
+require_token($token);
 
-  try {
+try {
     $dbh = dblogin();
-    $sql = 'SELECT userid, pwd FROM users WHERE email=?';
+    $sql = "SELECT userid, pwd FROM users WHERE email=?";
     $sth = $dbh->prepare($sql);
-    $sth->execute(array($email));
+    $sth->execute([$email]);
     $result = $sth->fetch();
-    if (! empty($result)) {
-      $userid  = $result['userid'];
-      $pwd     = $result['pwd'];
-      mb_send_mail($email, 
-           'パスワードをお知らせします', 
-           "$userid さん、あなたのパスワードは\n" . $pwd . " です\n");
+    if (!empty($result)) {
+        $userid = $result["userid"];
+        $pwd = $result["pwd"];
+        mb_send_mail(
+            $email,
+            "パスワードをお知らせします",
+            "$userid さん、あなたのパスワードは\n" . $pwd . " です\n"
+        );
     }
-  } catch (PDOException $e) {
-    $logger->add('クエリに失敗しました: ' . $e->getMessage());
-    die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい');
-  }
+} catch (PDOException $e) {
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい"
+    );
+}
 ?>
 <html>
 <head>

@@ -1,22 +1,26 @@
 <?php
-  require_once('./common.php');
-  require_loggedin($user);
-  $id = $user->get_id();
-  $item = filter_input(INPUT_GET, 'item');
+require_once "./common.php";
+require_loggedin($user);
+$id = $user->get_id();
+$item = filter_input(INPUT_GET, "item");
 
-  try {
+try {
     $dbh = dblogin();
 
-    $sql = "SELECT todos.id, users.userid, todo, c_date, due_date, done, file, public FROM todos INNER JOIN users ON todos.id = ? AND users.id = todos.owner";
+    $sql =
+        "SELECT todos.id, users.userid, todo, c_date, due_date, done, file, public FROM todos INNER JOIN users ON todos.id = ? AND users.id = todos.owner";
 
     $sth = $dbh->prepare($sql);
-    $sth->execute(array($item));
+    $sth->execute([$item]);
     $result = $sth->fetch();
-  } catch (PDOException $e) {
-    if ($dbh)
-      $logger->add('クエリに失敗しました: ' . $e->getMessage());
-    die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください');
-  }
+} catch (PDOException $e) {
+    if ($dbh) {
+        $logger->add("クエリに失敗しました: " . $e->getMessage());
+    }
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください"
+    );
+}
 ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">
@@ -29,31 +33,49 @@
     <form action="editdone.php" method="post" enctype="multipart/form-data">
     <table style="width: 60%;">
     <tr>
-    <td>ID</td><td><?php e($result['userid']); ?></td>
+    <td>ID</td><td><?php e($result["userid"]); ?></td>
     </tr>
     <tr>
-    <td>todo</td><td><input name="todo" value="<?php e($result['todo']); ?>"></td>
+    <td>todo</td><td><input name="todo" value="<?php e(
+        $result["todo"]
+    ); ?>"></td>
     </tr>
     <tr>
-    <td>登録日</td><td><input name="c_date" value="<?php e($result['c_date']); ?>"></td>
+    <td>登録日</td><td><input name="c_date" value="<?php e(
+        $result["c_date"]
+    ); ?>"></td>
     </tr>
     <tr>
-    <td>期限</td><td><input name="due_date" value="<?php e($result['due_date']); ?>"></td>
+    <td>期限</td><td><input name="due_date" value="<?php e(
+        $result["due_date"]
+    ); ?>"></td>
     </tr>
     <tr>
-    <td>完了</td><td><input type="checkbox" name="done" value="1" <?php if ($result['done']) e('checked="checked"'); ?>></td>
+    <td>完了</td><td><input type="checkbox" name="done" value="1" <?php if (
+        $result["done"]
+    ) {
+        e('checked="checked"');
+    } ?>></td>
     </tr>
     <tr>
-    <td>添付ファイル</td><td><?php e($result['file']); ?> <input name="attachment" type="file"></td>
+    <td>添付ファイル</td><td><?php e(
+        $result["file"]
+    ); ?> <input name="attachment" type="file"></td>
     </tr>
     <tr>
-    <td>公開</td><td><input type="checkbox" name="public" value="1" <?php if ($result['public']) e('checked="checked"'); ?>></td>
+    <td>公開</td><td><input type="checkbox" name="public" value="1" <?php if (
+        $result["public"]
+    ) {
+        e('checked="checked"');
+    } ?>></td>
     </tr>
     <tr>
     <td></td><td><input type="submit" value="更新"></td>
     </tr>
     </table>
-    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(get_token()); ?>">
+    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(
+    get_token()
+); ?>">
     <input type="hidden" name="item" value="<?php e($item); ?>">
     </form>
   </div><!-- /#contents -->

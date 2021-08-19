@@ -1,7 +1,7 @@
 <body><?php
-  session_start();
-  if (empty($_SESSION['user'])) {
+session_start();
+if (empty($_SESSION["user"])) {
     die("ログインしていません");
-  }
-  echo "ユーザ {$_SESSION['user']} でログイン中です";
+}
+echo "ユーザ {$_SESSION["user"]} でログイン中です";
 ?></body>

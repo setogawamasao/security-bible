@@ -1,22 +1,25 @@
 <?php
-  require_once('./common.php');
-  require_loggedin($user);
-  $id = $user->get_id();
-  $email = filter_input(INPUT_POST, 'email');
-  $reqid = filter_input(INPUT_POST, 'id');
-  if (empty($reqid))
+require_once "./common.php";
+require_loggedin($user);
+$id = $user->get_id();
+$email = filter_input(INPUT_POST, "email");
+$reqid = filter_input(INPUT_POST, "id");
+if (empty($reqid)) {
     $reqid = $id;
+}
 
-  try {
+try {
     $dbh = dblogin();
-  
-    $sql = 'UPDATE users SET email=? WHERE id=?';
+
+    $sql = "UPDATE users SET email=? WHERE id=?";
     $sth = $dbh->prepare($sql);
-    $rs = $sth->execute(array($email, $reqid));
-  } catch (PDOException $e) {
-    $logger->add('クエリに失敗しました: ' . $e->getMessage());
-    die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい');
-  }
+    $rs = $sth->execute([$email, $reqid]);
+} catch (PDOException $e) {
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてくだ>さい"
+    );
+}
 ?>
 <html>
 <head>

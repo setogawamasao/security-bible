@@ -1,25 +1,28 @@
 <?php
-  require_once('./common.php');
-  require_loggedin($user);
-  $id = $user->get_id();
-  $token = get_token();
-  $reqid = filter_input(INPUT_GET, 'id');
+require_once "./common.php";
+require_loggedin($user);
+$id = $user->get_id();
+$token = get_token();
+$reqid = filter_input(INPUT_GET, "id");
 var_dump($id, $reqid);
-  if (empty($reqid))
+if (empty($reqid)) {
     $reqid = $id;
+}
 var_dump($reqid);
-  try {
+try {
     $dbh = dblogin();
     $sql = "SELECT userid, email FROM users WHERE id=?";
     $sth = $dbh->prepare($sql);
-    $sth->execute(array($reqid));
+    $sth->execute([$reqid]);
     $result = $sth->fetch();
-    $requserid = $result['userid'];
-    $email  = $result['email'];
-  } catch (PDOException $e) {
-    $logger->add('クエリに失敗しました: ' . $e->getMessage());
-    die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください');
-  }
+    $requserid = $result["userid"];
+    $email = $result["email"];
+} catch (PDOException $e) {
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください"
+    );
+}
 ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">
@@ -33,14 +36,18 @@ var_dump($reqid);
     <form action="changemaildo.php" method="POST">
     <table>
     <tr>
-    <td>Eメール</td><td><input name="email" size="32" value="<?php e($email); ?>"></td>
+    <td>Eメール</td><td><input name="email" size="32" value="<?php e(
+        $email
+    ); ?>"></td>
     </tr>
     <tr>
     <td></td><td><input type=submit value="変更"></td>
     </tr>
     </table>
-    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e($token); ?>">
-    <?php if ($reqid !== $id) : ?>
+    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(
+    $token
+); ?>">
+    <?php if ($reqid !== $id): ?>
       <input type="hidden" name="id" value="<?php e($reqid); ?>">
     <?php endif; ?>
     </form>

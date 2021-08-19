@@ -1,9 +1,9 @@
 <?php
-  require_once('./common.php');
-  $url = filter_input(INPUT_GET, 'url');
-  if (empty($url)) {
+require_once "./common.php";
+$url = filter_input(INPUT_GET, "url");
+if (empty($url)) {
     $url = "todolist.php";
-  }
+}
 ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">
@@ -11,7 +11,10 @@
 </head>
 <body>
 <div id="top">
-<?php $menu = 8; require "menu.php"; ?>
+<?php
+$menu = 8;
+require "menu.php";
+?>
   <div id="loginform">
     <form action="logindo.php?" method="post">
     ログインしてください

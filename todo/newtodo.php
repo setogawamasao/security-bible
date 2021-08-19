@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 require_loggedin($user);
 $token = get_token();
 ?><html>
@@ -9,7 +9,10 @@ $token = get_token();
 </head>
 <body>
 <div id="top">
-<?php $menu = 2; require "menu.php"; ?>
+<?php
+$menu = 2;
+require "menu.php";
+?>
   <div id="newuser">
     todo新規登録<BR>
     <form action="addtodo.php" method="POST" enctype="multipart/form-data">
@@ -30,7 +33,9 @@ $token = get_token();
     <td></td><td><input type="submit" value="登録"></td>
     </tr>
     </table>
-    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e($token); ?>">
+    <input type="hidden" name="<?php e(TOKENNAME); ?>" value="<?php e(
+    $token
+); ?>">
     </form>
   </div><!-- /#newuser -->
   <div id="footer">

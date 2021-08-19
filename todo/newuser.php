@@ -1,6 +1,5 @@
 <?php
-  require_once('./common.php');
-?><html>
+require_once "./common.php"; ?><html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <title>会員登録</title>

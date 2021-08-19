@@ -1,26 +1,28 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 require_loggedin($user);
 $id = $user->get_id();
 
-$ids = @$_POST['id'];
+$ids = @$_POST["id"];
 if (empty($ids)) {
-  die('項目をチェックして下さい');
+    die("項目をチェックして下さい");
 }
-$process = filter_input(INPUT_POST, 'process');
+$process = filter_input(INPUT_POST, "process");
 
-$result = 'hogehoge';  // @@@@@
+$result = "hogehoge"; // @@@@@
 
 try {
-  $dbh = dblogin();
+    $dbh = dblogin();
 
-  foreach ($ids as $key => $value) {
-    $keys[":id_$key"] = $value;
-  }
-  require("$process.php");
+    foreach ($ids as $key => $value) {
+        $keys[":id_$key"] = $value;
+    }
+    require "$process.php";
 } catch (PDOException $e) {
-  die('只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください');
-  $logger->add('クエリに失敗しました: ' . $e->getMessage());
+    die(
+        "只今サイトが大変混雑しています。もうしばらく経ってからアクセスしてください"
+    );
+    $logger->add("クエリに失敗しました: " . $e->getMessage());
 }
 $dbh = null;
 ?><html>

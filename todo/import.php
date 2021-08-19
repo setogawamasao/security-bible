@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once "./common.php";
 require_loggedin($user);
 $id = $user->get_id();
 ?><html>
@@ -9,7 +9,10 @@ $id = $user->get_id();
 </head>
 <body>
 <div id="top">
-<?php $menu = 3; require "menu.php"; ?>
+<?php
+$menu = 3;
+require "menu.php";
+?>
   <div id="newuser">
     TODOインポート<BR>
     <form action="importdo.php" method="POST" enctype="multipart/form-data">
